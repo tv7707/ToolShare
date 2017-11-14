@@ -1,0 +1,361 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+    <style>
+        /* unvisited link */
+        a:link {
+            color: blue;
+        }
+
+        /* visited link */
+        a:visited {
+            color: darkblue;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: white;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #428bca;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 40px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            display: block;
+            transition: 0.3s
+        }
+
+        .sidenav a:hover, .offcanvas a:focus{
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+        }
+        .nav.navbar-nav.navbar-right li a {
+            color: white;
+        }
+
+        .color-me{
+            color:white;
+        }
+
+        .hovereffect {
+          width: 100%;
+          height: 100%;
+          float: left;
+          overflow: hidden;
+          position: relative;
+          text-align: center;
+          cursor: default;
+        }
+
+        .hovereffect .overlay {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          overflow: hidden;
+          top: 0;
+          left: 0;
+          background-color: rgba(0,0,0,0.6);
+          opacity: 0;
+          filter: alpha(opacity=0);
+          -webkit-transform: translate(460px, -100px) rotate(180deg);
+          -ms-transform: translate(460px, -100px) rotate(180deg);
+          transform: translate(460px, -100px) rotate(180deg);
+          -webkit-transition: all 0.2s 0.4s ease-in-out;
+          transition: all 0.2s 0.4s ease-in-out;
+        }
+
+        .hovereffect img {
+          display: block;
+          position: relative;
+          -webkit-transition: all 0.2s ease-in;
+          transition: all 0.2s ease-in;
+        }
+
+        .hovereffect h2 {
+          text-transform: uppercase;
+          color: #fff;
+          text-align: center;
+          position: relative;
+          font-size: 17px;
+          padding: 10px;
+          background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hovereffect a.info {
+          display: inline-block;
+          text-decoration: none;
+          padding: 7px 14px;
+          text-transform: uppercase;
+          color: #fff;
+          border: 1px solid #fff;
+          margin: 50px 0 0 0;
+          background-color: transparent;
+          -webkit-transform: translateY(-200px);
+          -ms-transform: translateY(-200px);
+          transform: translateY(-200px);
+          -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .hovereffect a.info:hover {
+          box-shadow: 0 0 5px #fff;
+        }
+
+        .hovereffect:hover .overlay {
+          opacity: 1;
+          filter: alpha(opacity=100);
+          -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+          -webkit-transform: translate(0px, 0px);
+          -ms-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+        }
+
+        .hovereffect:hover h2 {
+          -webkit-transform: translateY(0px);
+          -ms-transform: translateY(0px);
+          transform: translateY(0px);
+          -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+        }
+
+        .hovereffect:hover a.info {
+          -webkit-transform: translateY(0px);
+          -ms-transform: translateY(0px);
+          transform: translateY(0px);
+          -webkit-transition-delay: 0.3s;
+          transition-delay: 0.3s;
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Tools Share Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+
+  </head>
+
+  <div>
+
+    <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand color-me" href="/dashboard/">Tools Share Management Portal</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout/">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+
+    <li> <b> User Managment </b>
+    <ul>
+        <li><a href="/personalmanagemnet">Profile Management</a></li>
+        <li><a href="/changepassword">Change Password</a></li>
+
+    </ul>
+
+    <li> <b>Your Tools Activity</b>
+    <ul>
+            <li><a href="/registertool">Add new Tool</a></li>
+            <li><a href="/sharechange">My Tools</a></li>
+            <li><a href="/borroweditems">My Borrowed Tools</a></li>
+
+    </ul>
+
+    <li> <b>Community</b>
+    <ul>
+            <li><a href="/borrow">Borrow Tools</a></li>
+           <!-- <li><a href="/share">Share a Tool</a></li> -->
+            <li><a href="/listtool">Reserved Tools</a></li>
+            <li><a href="/statistics">Community Statistics</a></li>
+
+    </ul>
+    </ul>
+
+        </div>
+    </div>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/dashboard/">Tools Share Management Portal</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout/">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--<div class="container-fluid">
+      <div class="row">
+        <li class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li>  <h4 class="text-primary"><strong>UserName: </strong><em>{{username}}</em></h4></li>
+            <li>  <h4 class="text-primary"><strong>ShareZone: </strong><em>{{shed.ShedZip}}</em></h4></li>
+            <li><a href="/personalmanagemnet">- User Management -</a></li>
+            <li><a href="/changepassword">- Change Password -</a></li>
+            <li><a href="/registertool">- Register Tool -</a></li>
+            <li><a href="/mytools">- My Tools -</a></li>
+            <li><a href="/listtool">- List of Tools -</a></li>
+            <li><a href="/borrow">- Borrow Tools -</a></li>
+            <li><a href="/borroweditems">- Borrowed List -</a></li>
+            <li><a href="/choice">- List Community Sheds -</a></li>
+            <li><a href="/share">- Share a Tool -</a></li>
+            <li><a href="/sharechange">- Manage Sharing -</a></li>
+            <li><a href="/statistics">- Community Statistics -</a></li>
+            <li><a href="/approve">- Approve -</a></li>
+            <li><a href="/notification">- Notifications -</a></li>
+          </ul>
+        </li>
+      </div>
+    </div>-->
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <form action="/dashboard/"method="post">
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="text-left">Shed Name</th>
+                    <th class="text-left">Address</th>
+                    <th class="text-left">City</th>
+                    <th class="text-left">State</th>
+                    <th class="text-left">Zip Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% csrf_token %}
+                    {% load static %}
+                        {% for obj in all_sheds %}
+                            <tr>
+                                <td class="text-left">{{obj.ShedName}}</td>
+                                <td class="text-left">{{obj.ShedStreetAddress}}</td>
+                                <td class="text-left">{{obj.ShedCity}}</td>
+                                <td class="text-left">{{obj.ShedState}}</td>
+                                <td class="text-left">{{obj.ShedZip}}</td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-md-10 text-center">
+                <input name = "Finished" type="submit" class = "btn btn-success btn-lg" value="Done" />
+            </div>
+        </form>
+
+    </div>
+          <!--<div class="row placeholders">-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+              <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
+              <!--<h4>Label</h4>-->
+              <!--<span class="text-muted">Text</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+              <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
+              <!--<h4>Label</h4>-->
+              <!--<span class="text-muted">Text</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+              <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
+              <!--<h4>Label</h4>-->
+              <!--<span class="text-muted">Text</span>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6 col-sm-3 placeholder">-->
+              <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
+              <!--<h4>Label</h4>-->
+              <!--<span class="text-muted">Text</span>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="{% static 'js/vendor/holder.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>

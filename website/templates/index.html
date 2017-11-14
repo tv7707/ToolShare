@@ -1,0 +1,100 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Tools Share Project | Home</title>
+
+    <!-- Bootstrap core CSS -->
+      <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+     <link href="{% static 'css/mainpage.css' %}" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'navbar-static-top.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="background">
+
+    <!-- Static navbar -->
+    <!--<div class="intro-header">-->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Tools Share Project</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+     <li><a href="/register/">Not a Member? Register Here!</a></li>          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+	           <div class="row">
+                 <div class="col-lg-8">
+                   <!--<div class="jumbotron">-->
+                    <!--jksdfsdlfhgsdlf-->
+                   <!--</div>-->
+                   </div>
+	               <div class="col-lg-4">
+                        <div class="jumbotron" style="background-color: #f8f8f8;">
+	                   <div class="intro-message" id="login">
+	                       <h3>Tools Share Portal</h3>
+	                       <h4>Do you wanna borrow a tool?</h4>
+	                       <hr class="intro-divider">
+	                       <div class="form">
+
+	                       	<p class="bg-danger"><small><em>{{login_form.non_field_errors}}</em></small></p>
+
+	                       	<form role="form" method="post" action="/login/">
+	                       		{% csrf_token %}
+
+	                       		{% for field in login_form %}
+	                       		<div class="form-group {% if field.errors %} has-error {% endif %}">
+	                       			<label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+	                       			{{ field }}
+	                       			{{ field.errors }} {{error}}
+	                       		</div>
+	                       		{% endfor %}
+                                <a href="/recoverpassword/" >Forgot password?</a>
+                                <div class="form_link"><br>
+	                       		<button type="submit" class="btn btn-primary">Login</button>
+	                       	</form>
+	                       	<div class="form_link"><br>
+	                       	</div>
+	                       </div>
+	                   </div>
+                      </div>
+	               </div>
+	           </div>
+	</div>
+	</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>
